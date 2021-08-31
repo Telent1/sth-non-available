@@ -65,6 +65,17 @@ function getAreaNum(arr, x, y) {
   return list
 }
 
+function printSudo(arr) {
+  let result = ''
+  for (let i = 0; i < sudoLength; i += 1) {
+    for (let j = 0; j < sudoLength; j += 1) {
+      result += arr[i][j] + ' ';
+    }
+    result += "\n"
+  }
+  console.log(result)
+}
+
 function getAvailableNum(arr, x, y) {
   const rowNum = getRowNum(arr, x)
   const colNum = getColNum(arr, y)
@@ -90,25 +101,28 @@ function getNextEmptyPosition(arr) {
 function testNum(arr, x, y, num) {
   const tempArr = JSON.parse(JSON.stringify(arr))
   tempArr[x][y] = num
-  console.log(tempArr)
   const pos = getNextEmptyPosition(tempArr)
   if (!pos) {
+    printSudo(tempArr)
     return true
   }
   const {x: cx, y: cy} = pos
   const availableNum = getAvailableNum(tempArr, cx, cy)
+  // if(availableNum.length === 0) {
+  //   return false;
+  // }
   for (let i = 0; i < availableNum.length; i += 1) {
-    return testNum(tempArr, cx, cy, availableNum[i])
+    testNum(tempArr, cx, cy, availableNum[i])
   }
-  return false;
 }
 
 function init() {
   const {x, y} = getNextEmptyPosition(sudo)
   const availableNum = getAvailableNum(sudo, x, y)
   for (let i = 0; i < availableNum.length; i += 1) {
-    // testNum(sudo, x, y, availableNum[i])  
+    testNum(sudo, x, y, availableNum[i])  
   }
+  console.log('finish')
 }
 
 window.onload = init
