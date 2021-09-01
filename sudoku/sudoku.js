@@ -13,15 +13,15 @@ const areaArr = [
 ]
 
 const sudo = [
-  [2, 8, 0, 0, 7, 0, 0, 0, 5],
-  [0, 4, 0, 5, 6, 0, 0, 1, 0],
-  [0, 7, 0, 0, 2, 0, 8, 0, 9],
-  [0, 3, 0, 0, 0, 5, 6, 0, 0],
-  [4, 9, 0, 0, 3, 1, 0, 8, 2],
-  [0, 0, 5, 8, 0, 0, 0, 4, 0],
-  [7, 0, 9, 0, 5, 0, 0, 2, 0],
-  [0, 2, 0, 0, 1, 7, 0, 5, 0],
-  [3, 0, 0, 0, 8, 0, 0, 7, 6]
+  [0,0,0,9,0,0,6,0,4],
+  [0,0,2,0,0,0,5,0,0],
+  [3,0,5,0,0,0,0,0,0],
+  [5,0,0,0,1,0,0,0,0],
+  [0,0,4,0,0,0,7,1,0],
+  [1,0,0,0,9,2,0,0,0],
+  [6,0,7,4,0,0,0,0,0],
+  [0,0,0,8,0,0,0,3,7],
+  [0,0,0,0,5,0,2,0,6]
 ]
 
 function getRowNum(arr, x) {
@@ -117,12 +117,16 @@ function testNum(arr, x, y, num) {
 }
 
 function init() {
+  console.log('=====begin=====')
+  const beginTime = new Date().getTime()
   const {x, y} = getNextEmptyPosition(sudo)
   const availableNum = getAvailableNum(sudo, x, y)
   for (let i = 0; i < availableNum.length; i += 1) {
     testNum(sudo, x, y, availableNum[i])  
   }
-  console.log('finish')
+  const endTime = new Date().getTime()
+  const spendTime = endTime - beginTime
+  console.log('=====finish=====', '耗时：' + spendTime + 'ms')
 }
 
 window.onload = init
